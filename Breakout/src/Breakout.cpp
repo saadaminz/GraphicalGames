@@ -1,6 +1,4 @@
 
-#include <iostream>
-
 #include "Breakout.h"
 
 void Breakout::InitBricks_Crystal()
@@ -75,7 +73,9 @@ void Breakout::UpdatePositions()
 				// Item drop: Fireball (Passes through bricks, destroying without changing direction)
 				// Item drop: Paddle expansion, and contration
 				// Item drop: BallMultipliyer (Multiplies all in-air balls and sends the new balls in reverse direction)
+				// Item drop: IncreaseBallSpeed, DecreaseBallSpeed (Adds/Subtracts velocity for all in-air balls)
 				// Add start menu, and game menu upon EXIT or game end
+				// Add Lives counter
 		}
 	}
 }
@@ -161,10 +161,4 @@ void Breakout::RunLoop()
 	}
 
 	CloseWindow();
-}
-
-int main()
-{
-	Breakout breakout(1280, 720);
-	breakout.RunLoop();
 }

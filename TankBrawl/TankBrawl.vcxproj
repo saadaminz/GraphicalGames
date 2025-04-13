@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{44f3a0f6-41da-4b31-90cd-b642f9e7d82c}</ProjectGuid>
-    <RootNamespace>Breakout</RootNamespace>
+    <ProjectGuid>{2cb1ac8d-ab03-4a22-a285-76eafd473e3b}</ProjectGuid>
+    <RootNamespace>TankBrawl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -167,11 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Breakout.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TankBrawl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Breakout.h" />
+    <ClInclude Include="src\TankBrawl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

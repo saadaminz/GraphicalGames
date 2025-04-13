@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Breakout.cpp">
+    <ClCompile Include="src\TankBrawl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
@@ -23,7 +23,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Breakout.h">
+    <ClInclude Include="src\TankBrawl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
