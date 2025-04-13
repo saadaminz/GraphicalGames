@@ -70,6 +70,12 @@ void Breakout::UpdatePositions()
 		else if (ball.pos.y > (screenHeight - ball.radius))
 		{
 			ball.vel.y *= -1;
+			// Todo:
+				// Deduct 1 live and reset Paddle and Ball if no balls are left in air
+				// Item drop: Fireball (Passes through bricks, destroying without changing direction)
+				// Item drop: Paddle expansion, and contration
+				// Item drop: BallMultipliyer (Multiplies all in-air balls and sends the new balls in reverse direction)
+				// Add start menu, and game menu upon EXIT or game end
 		}
 	}
 }
