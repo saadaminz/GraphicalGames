@@ -173,6 +173,29 @@
   <ItemGroup>
     <ClInclude Include="src\TankBrawl.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\maps\map1.png" />
+    <Image Include="resources\menu.png" />
+    <Image Include="resources\old\empty_cell.png" />
+    <Image Include="resources\old\map1.png" />
+    <Image Include="resources\old\tank_red_256.png" />
+    <Image Include="resources\old\wall.png" />
+    <Image Include="resources\old\wall_bottom_256.png" />
+    <Image Include="resources\old\wall_gray.png" />
+    <Image Include="resources\old\wall_left_256.png" />
+    <Image Include="resources\old\wall_right_256.png" />
+    <Image Include="resources\old\wall_up_256.png" />
+    <Image Include="resources\tanks\tank_blue_default.png" />
+    <Image Include="resources\tanks\tank_green_default.png" />
+    <Image Include="resources\tanks\tank_red_default.png" />
+    <Image Include="resources\tank_red_256.png" />
+    <Image Include="resources\tank_red_32.png" />
+    <Image Include="resources\tank_red_32_64.png" />
+    <Image Include="resources\wall_bottom_256.png" />
+    <Image Include="resources\wall_left_256.png" />
+    <Image Include="resources\wall_right_256.png" />
+    <Image Include="resources\wall_up_256.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

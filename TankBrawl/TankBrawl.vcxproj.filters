@@ -27,4 +27,69 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\tank_red_32.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tank_red_32_64.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tank_red_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\wall_bottom_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\wall_left_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\wall_right_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\wall_up_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\menu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\tank_green_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\maps\map1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\tank_blue_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\tank_red_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\empty_cell.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\map1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\tank_red_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall_bottom_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall_gray.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall_left_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall_right_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\old\wall_up_256.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
