@@ -3,11 +3,11 @@
 
 void Breakout::InitBricks_Crystal()
 {
-	int center = bQuantity / 2;
+	int center = length / 2;
 
-	for (int i = 0; i < bQuantity; i++)
+	for (int i = 0; i < length; i++)
 	{
-		for (int j = 0; j < bQuantity; j++)
+		for (int j = 0; j < length; j++)
 		{
 			int distance = abs(i - center) + abs(j - center);
 
@@ -85,9 +85,9 @@ void Breakout::DetectCollisions()
 	bPos.x = bWidth;
 	bPos.y = bHeight;
 
-	for (int i = 0; i < bQuantity; i++)
+	for (int i = 0; i < length; i++)
 	{
-		for (int j = 0; j < bQuantity; j++)
+		for (int j = 0; j < length; j++)
 		{
 			if (ColorToInt(bBricks[i][j]) != ColorToInt(BLACK))
 			{
@@ -116,7 +116,7 @@ void Breakout::DetectCollisions()
 						}
 					}
 
-					if (CheckCollisionCircleRec({ ball.pos.x, ball.pos.y }, ball.radius, { pPos.x, pPos.y, pWidth, pHeight }))
+					else if (CheckCollisionCircleRec({ ball.pos.x, ball.pos.y }, ball.radius, { pPos.x, pPos.y, pWidth, pHeight }))
 					{
 						ball.pos.y = pPos.y - ball.radius;
 

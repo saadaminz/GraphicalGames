@@ -7,8 +7,7 @@
 struct Ball
 {
 	float radius;
-	Vector2 pos;
-	Vector2 vel;
+	Vector2 pos, vel;
 };
 
 struct Breakout
@@ -19,12 +18,12 @@ struct Breakout
 	Vector2 pPos;
 	int pVelX;
 
-	static const int bQuantity = 27;
+	static const int length = 27;
 	float bWidth, bHeight;
 	Vector2 bPos;
 	float bSpace;
 
-	Color bBricks[bQuantity][bQuantity];
+	Color bBricks[length][length];
 
 	Color bPalette[14] = {
 		MAROON,RED,ORANGE,GOLD,YELLOW,
@@ -49,10 +48,10 @@ struct Breakout
 		, pHeight(screenHeight * 0.02f)
 		, pPos({ (screenWidth / 2.0f) - (pWidth / 2.0f), screenHeight - (pHeight * 1.5f) })
 		, pVelX(screenWidth * 0.008f)
-		, bWidth((screenWidth * 0.81f) / bQuantity)
-		, bHeight((screenHeight * 0.55f) / bQuantity)
+		, bWidth((screenWidth * 0.81f) / length)
+		, bHeight((screenHeight * 0.55f) / length)
 		, bPos({ bWidth, bHeight })
-		, bSpace((screenHeight / 4.0f) / bQuantity)
+		, bSpace((screenHeight / 4.0f) / length)
 	{
 		Ball ball;
 		ball.radius = (bHeight + bWidth) / 8.0f;
