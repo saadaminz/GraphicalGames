@@ -91,5 +91,35 @@
     <Image Include="resources\old\wall_up_256.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\maps\map2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\blue.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\green.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tanks\red.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tank_blue_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tank_green_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\tank_red_default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\green.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\map1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="colors.txt" />
   </ItemGroup>
 </Project>

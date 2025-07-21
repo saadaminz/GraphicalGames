@@ -12,8 +12,8 @@ void TankBrawl::LoadTextures()
 		{
 			Texture2D texture = LoadTexture(entry.path().string().c_str());
 
-			texture.width = static_cast<int>(texture.width * mapScale);
-			texture.height = static_cast<int>(texture.height * mapScale);
+			texture.width = static_cast<int>(texture.width);
+			texture.height = static_cast<int>(texture.height);
 
 			maps.push_back(texture);
 		}
@@ -36,15 +36,18 @@ void TankBrawl::LoadTextures()
 		{
 			Texture2D texture = LoadTexture(entry.path().string().c_str());
 
-			texture.width = static_cast<int>(texture.width * tankScale);
-			texture.height = static_cast<int>(texture.height * tankScale);
+			texture.width = static_cast<int>(texture.width);
+			texture.height = static_cast<int>(texture.height);
 
 			Tank tank(i);
 
 			tank.sprite = texture;
-			tank.pos.x = 75 + posDistance;
-			tank.pos.y = 55 + posDistance;
+			/*tank.pos.x = 75 + posDistance;
+			tank.pos.y = 55 + posDistance;*/
+			tank.pos.x = 10 + posDistance;
+			tank.pos.y = 10 + posDistance;
 			tank.lastPos = tank.pos;
+			tank.frameHeight = texture.height / 4;
 
 			//tank.color = DecideColor(entry.path().string().c_str());
 			tank.color = WHITE;
@@ -56,18 +59,18 @@ void TankBrawl::LoadTextures()
 			else if (i == 2)
 				tank.color = RED;*/
 
-			tank.hitBox = Rectangle{ tank.pos.x - texture.width / 2.0f,
+			/*tank.hitBox = Rectangle{ tank.pos.x - texture.width / 2.0f,
 				tank.pos.y - texture.height / 2.0f,
 				(float)texture.width,
 				(float)texture.height
-			};
+			};*/
 
 			tanks.push_back(tank);
 
 			//tanksTex.push_back(texture);
 
 			i++;
-			posDistance += 200;
+			//posDistance += 200;
 		}
 	}
 
@@ -188,9 +191,25 @@ void TankBrawl::DrawMap()
 {
 	Texture2D& map = maps[playedGames];
 
-	DrawTexturePro(map,
+	/*DrawTexturePro(map,
 		Rectangle{ 0.0f, 0.0f, (float)map.width, (float)map.height },
 		Rectangle{ 35, 10, (float)map.width, (float)map.height },
+		Vector2{ 0.0f, 0.0f },
+		0.0f,
+		WHITE
+	);*/
+
+	/*DrawTexturePro(map,
+		Rectangle{ 0.0f, 0.0f, (float)map.width, (float)map.height },
+		Rectangle{ 0, 0, (float)map.width * mapScale, (float)map.height * mapScale },
+		Vector2{ 0.0f, 0.0f },
+		0.0f,
+		WHITE
+	);*/
+
+	DrawTexturePro(map,
+		Rectangle{ 0.0f, 0.0f, (float)map.width, (float)map.height },
+		Rectangle{ 0, 0, (float)map.width, (float)map.height },
 		Vector2{ 0.0f, 0.0f },
 		0.0f,
 		WHITE
@@ -218,6 +237,8 @@ void TankBrawl::HandleTanks()
 	{
 		Tank& tank = tanks[i];
 		tank.moved = false;
+
+		int currentFrame = 0;
 
 		if (tank.id == 0 || tank.id == 2)
 		{
@@ -262,17 +283,17 @@ void TankBrawl::HandleTanks()
 			{
 				if (IsKeyDown(KEY_W))
 				{
+					tank.lastPos = tank.pos;
 					tank.pos.x += tank.dir.x * tank.vel.x * tank.speed;
 					tank.pos.y += tank.dir.y * tank.vel.y * tank.speed;
-					tank.lastPos = tank.pos;
 					tank.moved = true;
 				}
 
 				else if (IsKeyDown(KEY_S))
 				{
+					tank.lastPos = tank.pos;
 					tank.pos.x -= tank.dir.x * tank.vel.x * tank.speed;
 					tank.pos.y -= tank.dir.y * tank.vel.y * tank.speed;
-					tank.lastPos = tank.pos;
 					tank.moved = true;
 				}
 			}
@@ -281,17 +302,17 @@ void TankBrawl::HandleTanks()
 			{
 				if (IsKeyDown(KEY_UP))
 				{
+					tank.lastPos = tank.pos;
 					tank.pos.x += tank.dir.x * tank.vel.x * tank.speed;
 					tank.pos.y += tank.dir.y * tank.vel.y * tank.speed;
-					tank.lastPos = tank.pos;
 					tank.moved = true;
 				}
 
 				else if (IsKeyDown(KEY_DOWN))
 				{
+					tank.lastPos = tank.pos;
 					tank.pos.x -= tank.dir.x * tank.vel.x * tank.speed;
 					tank.pos.y -= tank.dir.y * tank.vel.y * tank.speed;
-					tank.lastPos = tank.pos;
 					tank.moved = true;
 				}
 			}
@@ -307,7 +328,7 @@ void TankBrawl::HandleTanks()
 
 			float distance = sqrt(toMouse.x * toMouse.x + toMouse.y * toMouse.y);
 			
-			if (distance > 20.0f)
+			if (distance > 10.0f)
 			{
 				toMouse.x /= distance;
 				toMouse.y /= distance;
@@ -334,27 +355,51 @@ void TankBrawl::HandleTanks()
 				tank.dir.x = sin(tank.angle * DEG2RAD);
 				tank.dir.y = -cos(tank.angle * DEG2RAD);
 			
+				tank.lastPos = tank.pos;
 				tank.pos.x += toMouse.x * tank.speed * 3.5f;
 				tank.pos.y += toMouse.y * tank.speed * 3.2f;
-				tank.lastPos = tank.pos;
 				tank.moved = true;
 			}
 		}
 
 		Texture2D& texture = tanks[i].sprite;
 
+		int frameHeight = tank.frameHeight;
+
+		int currentFrameY = currentFrame * frameHeight;
+
+		/*Vector2 rotationCenter = Vector2{ texture.width * tankScale / 2.0f, frameHeight * tankScale / 2.0f };
+
+		Rectangle destRec = {
+			tank.pos.x - (texture.width * tankScale / 2),
+			tank.pos.y - (frameHeight * tankScale / 2),
+			texture.width * tankScale,
+			frameHeight * tankScale
+		};*/
+
+		Vector2 rotationCenter = Vector2{ texture.width * tankScale / 2.0f, frameHeight * tankScale / 2.0f };
+
+		Rectangle destRec = {
+			tank.pos.x - (texture.width / 2),
+			tank.pos.y - (frameHeight / 2),
+			texture.width * tankScale,
+			frameHeight * tankScale
+		};
+
 		DrawTexturePro(texture,
-			Rectangle{ 0.0f, 0.0f, (float)texture.width, (float)texture.height },
-			Rectangle{ tank.pos.x, tank.pos.y, (float)texture.width, (float)texture.height },
-			Vector2{ texture.width / 2.0f, texture.height / 2.0f },
+			Rectangle{ 0.0f, (float)currentFrameY, (float)texture.width, (float)frameHeight},
+			//Rectangle{ tank.pos.x, tank.pos.y, (float)texture.width * tankScale, (float)frameHeight * tankScale },
+			destRec,
+			//Vector2{ texture.width * tankScale / 2.0f, texture.height * tankScale / 2.0f },
+			rotationCenter,
 			tank.angle,
 			tank.color
 		);
 
 		tank.hitBox = Rectangle{ tank.pos.x - texture.width / 2.0f,
-				tank.pos.y - texture.height / 2.0f,
-				(float)texture.width,
-				(float)texture.height
+				tank.pos.y - frameHeight/ 2.0f,
+				(float)texture.width * tankScale,
+				(float)frameHeight * tankScale
 		};
 
 		// On random but not black lines positions
@@ -374,8 +419,9 @@ void TankBrawl::HandleCollisions()
 	{
 		Tank& tankA = tanks[i];
 
-		TankWallCollisions(tankA);
-
+		TankWallCollision(tankA);
+		//TankWallCollision(tanks[1]);
+		
 		for (int j = i + 1; j < playersCount; j++)
 		{
 			Tank& tankB = tanks[j];
@@ -452,26 +498,65 @@ void TankBrawl::TankWallCollision(Tank& tank)
 	float backX = tank.pos.x - cos(angleInRadius) * hitBox.width / 2;
 	float backY = tank.pos.y - sin(angleInRadius) * hitBox.height / 2;
 
-	Color frontColor = GetImageColor(mapImage, static_cast<int>(frontX), static_cast<int>(frontY));
-	Color backColor = GetImageColor(mapImage, static_cast<int>(backX), static_cast<int>(backY));
+	float leftAngle = angleInRadius - (PI / 2);
+	float rightAngle = angleInRadius + (PI / 2);
+
+	float leftX = tank.pos.x + cos(leftAngle) * hitBox.width / 2;
+	float leftY = tank.pos.y + sin(leftAngle) * hitBox.height / 2;
+
+	float rightX = tank.pos.x + cos(rightAngle) * hitBox.width / 2;
+	float rightY = tank.pos.y + sin(rightAngle) * hitBox.height / 2;
+
+	//float mapOffsetX = 0.0f;//35.0f;
+	//float mapOffsetY = 0.0f;//10.0f;
+
+	/*float scaleX = (float)mapImage.width / 64.0f;
+	float scaleY = (float)mapImage.height / 64.0f;*/
+
+	int adjustedFrontX = static_cast<int>(frontX/* / scaleX*/);
+	int adjustedFrontY = static_cast<int>(frontY/* / scaleY*/);
+	int adjustedBackX = static_cast<int>(backX/* / scaleX*/);
+	int adjustedBackY = static_cast<int>(backY/* / scaleY*/);
+
+	int adjustedLeftX = static_cast<int>(leftX);
+	int adjustedLeftY = static_cast<int>(leftY);
+	int adjustedRightX = static_cast<int>(rightX);
+	int adjustedRightY = static_cast<int>(rightY);
+
+	/*adjustedFrontX = std::clamp(adjustedFrontX, 0, 63);
+	adjustedFrontY = std::clamp(adjustedFrontY, 0, 63);
+	adjustedBackX = std::clamp(adjustedBackX, 0, 63);
+	adjustedFrontY = std::clamp(adjustedBackY, 0, 63);*/
+
+	Color frontColor = GetImageColor(mapImage, adjustedFrontX, adjustedFrontY);
+	Color backColor = GetImageColor(mapImage, adjustedBackX, adjustedBackY);
+	
+	Color leftColor = GetImageColor(mapImage, adjustedLeftX, adjustedLeftY);
+	Color rightColor = GetImageColor(mapImage, adjustedRightX, adjustedRightY);
 
 	/*DrawPixel(frontX, frontY, RED);
 	DrawPixel(backX, backY, BLUE);*/
 
-	tank.color = frontColor;
+	//tank.color = frontColor;
 
-	/*char frontColorText[50];
+	char frontColorText[50];
 	sprintf(frontColorText, "Front Color: R:%d G:%d B:%d", frontColor.r, frontColor.g, frontColor.b);
 	DrawText(frontColorText, 30, 30, 25, WHITE);
 
 	char backColorText[50];
 	sprintf(backColorText, "Back Color: R:%d G:%d B:%d", backColor.r, backColor.g, backColor.b);
-	DrawText(backColorText, 30, 60, 25, WHITE);*/
+	DrawText(backColorText, 30, 60, 25, WHITE);
+
+	float moveDistance = 1.0f;
 
 	if ((frontColor.r == 61 && frontColor.g == 61 && frontColor.b == 61) ||
-		backColor.r == 61 && backColor.g == 61 && backColor.b == 61)
+		(backColor.r == 61 && backColor.g == 61 && backColor.b == 61) ||
+		(leftColor.r == 61 && leftColor.g == 61 && leftColor.b == 61) ||
+		(rightColor.r == 61 && rightColor.g == 61 && rightColor.b == 61))
 	{
-		tank.pos = tank.lastPos;
+		DrawText("Collision Detected", 30, 100, 25, RED);
+		tank.pos.x = tank.lastPos.x + cos(angleInRadius * DEG2RAD) * moveDistance;
+		tank.pos.y = tank.lastPos.y + sin(angleInRadius * DEG2RAD) * moveDistance;
 	}
 
 	UnloadImage(mapImage);
@@ -576,6 +661,53 @@ void TankBrawl::TankWallCollisions(Tank& tank)
 	UnloadRenderTexture(captureTexture);
 }
 
+void TankBrawl::PrintImageColors(Texture2D& texture)
+{
+	Image image = LoadImageFromTexture(texture);
+
+	if (image.width == 0 || image.height == 0)
+		return;
+	
+	int maxRows = 1000;
+	int maxCols = 1000;
+
+	//int startX = 10;
+	//int startY = 10;
+	//int lineSpacing = 30;
+
+	std::ofstream outFile("colors.txt");
+
+	if (!outFile.is_open())
+	{
+		UnloadImage(image);
+		return;
+	}
+
+	outFile << "Pixel Colors (r,g,b) - Format: Pixel x y: r, g, b\n";
+
+	for (int y = 0; y < maxRows && y < image.height; y++)
+	{
+		for (int x = 0; x < maxCols && x < image.width; x++)
+		{
+			Color pixelColor = GetImageColor(image, x, y);
+
+			//char colorText[100];
+
+			outFile << "Pixel " << x + 1 << " " << y + 1 << ": "
+				<< "r: " << static_cast<int>(pixelColor.r) << " "
+				<< "g: " << static_cast<int>(pixelColor.g) << " "
+				<< "b: " << static_cast<int>(pixelColor.b) << "\n";
+
+			//sprintf(colorText, "Pixel   %d x %d:                  %d                          %d                          %d", x + 1, y + 1, pixelColor.r, pixelColor.g, pixelColor.b);
+			//DrawText(colorText, startX, startY + (y * lineSpacing), 20, RED);
+		}
+	}
+
+	outFile.close();
+
+	UnloadImage(image);
+}
+
 void TankBrawl::RunGame()
 {
 	//SpawnTanks();
@@ -595,6 +727,8 @@ void TankBrawl::RunGame()
 		HandleTanks();
 
 		HandleCollisions();
+
+		//PrintImageColors(maps[playedGames]);
 
 		//DrawCircleFromMousePosition();
 

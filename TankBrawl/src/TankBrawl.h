@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <filesystem>
+#include <fstream>
 
 #include "Raylib/raylib.h"
 
@@ -11,6 +12,7 @@ public:
 	Texture2D sprite;
 	Vector2 pos, lastPos, vel, dir;
 	int id, victories;
+	int frameHeight;
 	Color color;
 	float angle, speed;
 	Rectangle hitBox;
@@ -22,6 +24,7 @@ public:
 		, vel{3, 3}
 		, angle(160.0f)
 		, speed(0.45f)
+		, frameHeight(0)
 	{}
 };
 
@@ -62,6 +65,8 @@ public:
 
 	// Tests
 
+	void PrintImageColors(Texture2D& texture);
+
 	Color DecideColor(const std::string& fileName);
 
 	void DrawCircleFromMousePosition();
@@ -72,7 +77,7 @@ public:
 		: screenWidth(_screenWidth)
 		, screenHeight(_screenHeight)
 		, mapScale(11.7f)
-		, tankScale(0.11f)
+		, tankScale(2.11f)
 		, playedGames(0)
 		, playersCount(0)
 	{
